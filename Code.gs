@@ -1,10 +1,10 @@
-const SPREADSHEET_ID = 'PASTE_YOUR_GOOGLE_SPREADSHEET_ID_HERE';
+const SPREADSHEET_ID = 'https://docs.google.com/spreadsheets/d/1iMQqnYSzdT8HXO9Hmkoo4BbzZvFQqnolYkIYGLvDZZE/edit?usp=sharing';
 const SHEET_NAME = 'Website Enquiries';
 function doPost(e) {
   try {
     const p=(e&&e.parameter)||{};
     if(!String(p.fullName||'').trim()||!String(p.phone||'').trim()) throw new Error('Name and phone are required.');
-    if(SPREADSHEET_ID==='PASTE_YOUR_GOOGLE_SPREADSHEET_ID_HERE') throw new Error('Configure SPREADSHEET_ID in Code.gs.');
+    if(SPREADSHEET_ID==='https://docs.google.com/spreadsheets/d/1iMQqnYSzdT8HXO9Hmkoo4BbzZvFQqnolYkIYGLvDZZE/edit?usp=sharing') throw new Error('Configure SPREADSHEET_ID in Code.gs.');
     const ss=SpreadsheetApp.openById(SPREADSHEET_ID);let sheet=ss.getSheetByName(SHEET_NAME);if(!sheet)sheet=ss.insertSheet(SHEET_NAME);
     const headers=['Timestamp','Full Name','Company','Email','Phone','Enquiry Type','Quantity','Budget per Gift','Requirements'];
     if(sheet.getLastRow()===0){sheet.appendRow(headers);sheet.getRange(1,1,1,headers.length).setFontWeight('bold');sheet.setFrozenRows(1)}
